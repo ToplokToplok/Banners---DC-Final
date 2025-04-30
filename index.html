@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Travel Explorer</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    const slides = [
+      { image: 'uploads/banner1.jpg', description: 'uploads/banner1.txt', destination: 'uploads/destination1.jpg', link: 'https://www.lonelyplanet.com/destinations/indonesia/bali' },
+      { image: 'uploads/banner2.jpg', description: 'uploads/banner2.txt', destination: 'uploads/destination2.jpg', link: 'https://www.lonelyplanet.com/destinations/switzerland' },
+      { image: 'uploads/banner3.jpg', description: 'uploads/banner3.txt', destination: 'uploads/destination3.jpg', link: 'https://www.lonelyplanet.com/destinations/italy/rome' },
+      { image: 'uploads/banner4.jpg', description: 'uploads/banner4.txt', destination: 'uploads/destination4.jpg', link: 'https://www.lonelyplanet.com/destinations/japan/tokyo' }
+    ];
+
+    let currentIndex = 0, selectedIndex = 0, slideshowInterval;
+
+    async function loadDescription(index) {
+      try {
+        const response = await fetch(`${slides[index].description}?v=${Date.now()}`);
+        document.getElementById('destination-desc').innerText = await response.text();
+      } catch {
+        document.getElementById('destination-desc').innerText = "Description not available.";
+      }
+    }
+
+    function showBanner(index) {
+      const banner = document.getElementById('banner-img');
+      banner.style.opacity = 0;
+      setTimeout(() => {
+        banner.src = slides[index].image;
+        banner.style.opacity = 1;
+      }, 300);
+    }
+
+    function showDestination(index) {
+      document.getElementById('destination-img').src = slides[index].destination;
+      document.querySelector('.destination a').href = slides[index].link;
+      loadDescription(index);
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      showBanner(currentIndex);
+    }
+
+    function bannerClicked() {
+      selectedIndex = currentIndex;
+      showDestination(selectedIndex);
+    }
+
+    window.onload = () => {
+      showBanner(0);
+      showDestination(0);
+      slideshowInterval = setInterval(nextSlide, 3000);
+    };
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="menu">
+      <h1>🌍 Travel Explorer</h1>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">Destinations</a>
+        <a href="#">Packages</a>
+        <a href="https://www.facebook.com/rastafarai432" target="_blank">Contact</a>
+        <a href="upload.php">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="banner">
+      <div class="slideshow">
+        <img id="banner-img" src="uploads/banner1.jpg" alt="Banner" onclick="bannerClicked()">
+      </div>
+    </section>
+
+    <section class="destination">
+      <a href="" target="_blank"><img id="destination-img" src="" alt="Destination"></a>
+      <div class="description">
+        <p id="destination-desc"></p>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Travel Explorer - Cristino Algodon III.<br> All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="https://www.facebook.com/rastafarai432" target="_blank">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
