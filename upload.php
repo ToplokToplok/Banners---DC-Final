@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bannerNumber'])) {
     }
     body {
       background: url("uploads/PageBg.png") repeat;
-      background-size: 400px auto;
+      background-size: 600px auto;
       font-family: 'Inter', sans-serif;
       align-items: center;
       min-height: 100vh;
