@@ -10,7 +10,7 @@
     height: 100%;
     overflow-x: hidden;
     background: url("uploads/PageBg.png") repeat;
-    background-size: 400px auto; /* Adjust to your liking */
+    background-size: 600px auto; /* Adjust to your liking */
     background-color: #eef2f5;
     font-family: 'Inter', sans-serif;
   }
