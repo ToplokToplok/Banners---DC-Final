@@ -49,6 +49,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bannerNumber'])) {
       align-items: center;
       min-height: 100vh;
     }
+    header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(12px);
+    background: #2c3e50;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s ease, backdrop-filter 0.3s ease;
+    margin-bottom: 40px;
+  }
 
     .hh1{
       padding-left: 0px;
@@ -70,6 +86,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bannerNumber'])) {
       border-radius: 12px;
       margin-bottom: 20px;
       margin: auto;
+    }
+    .upload-container p {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #fff;
+      font-size: 30px;
     }
     .panel {
       background: #2c3e50;
@@ -135,6 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bannerNumber'])) {
     </div>
   </header>
     <div class="upload-container">
+      <p>Update Banners and Descriptions</p>
       <?php for ($i = 1; $i <= 4; $i++): ?>
         <form class="panel" enctype="multipart/form-data">
           <h3>Banner Set <?= $i ?></h3>
