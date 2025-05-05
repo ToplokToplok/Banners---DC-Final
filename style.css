@@ -10,7 +10,7 @@
     height: 100%;
     overflow-x: hidden;
     background: url("uploads/PageBg.png") repeat;
-    background-size: 600px auto; /* Adjust to your liking */
+    background-size: 600px auto;
     background-color: #eef2f5;
     font-family: 'Inter', sans-serif;
   }
@@ -84,7 +84,7 @@
   
   /* Banner (Slideshow) */
   .banner {
-    margin: 20px;
+    margin: 10px;
     border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     display: flex;
