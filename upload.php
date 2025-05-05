@@ -209,36 +209,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bannerNumber'])) {
         fetch('upload.php', { method: 'POST', body: formData })
           .then(response => response.text())
           .then(result => {
-            alert(result.trim() === "success" ? 'Updated successfully!' : 'Failed to update.');
-            location.reload();
+            if (result.trim() === "success") {
+              alert('Updated successfully!');
+              form.querySelectorAll('img.preview-img').forEach(img => {
+                const src = img.src.split('?')[0];
+                img.src = `${src}?v=${Date.now()}`;
+              });
+            } else {
+              alert('Failed to update.');
+            }
           })
           .catch(() => alert('Error occurred!'));
       });
     });
     function deleteImage(fileName) {
-    if (confirm('Are you sure you want to delete ' + fileName + '?')) {
-        const formData = new FormData();
-        formData.append('deleteImage', fileName);
+  if (confirm('Are you sure you want to delete ' + fileName + '?')) {
+    const formData = new FormData();
+    formData.append('deleteImage', fileName);
 
-        fetch('upload.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.text())
-        .then(result => {
-            if (result.trim() === "deleted") {
-                alert(fileName + ' deleted successfully!');
-                location.reload();
-            } else {
-                alert('Failed to delete ' + fileName);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error occurred while deleting!');
+    fetch('upload.php', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.text())
+    .then(result => {
+      if (result.trim() === "deleted") {
+        alert(fileName + ' deleted successfully!');
+        document.querySelectorAll('img.preview-img').forEach(img => {
+          if (img.src.includes(fileName)) {
+            img.src = '';
+          }
         });
-    }
+      } else {
+        alert('Failed to delete ' + fileName);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Error occurred while deleting!');
+    });
+  }
 }
+
   </script>
 
 </body>
